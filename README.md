@@ -1,35 +1,32 @@
 # menu-management
 
-菜单管理系统项目仓库。
+菜单管理系统。
 
-当前阶段重点不是直接开发业务功能，而是先建立一套可持续协作的研发流程、项目文档体系和任务推进机制，确保后续无论是人类开发者还是 AI 助手，都能低成本接手并持续推进。
+## 简介
 
-## 文档入口
+这是一个用于菜单信息维护与管理的项目，目标是提供清晰、可扩展的菜单管理能力。
 
-- [AGENTS.md](/Users/henryzhu/project/menu-management/AGENTS.md)
-  项目协作约束、开发流程、AI 助手工作方式
-- [PLAN.md](/Users/henryzhu/project/menu-management/PLAN.md)
-  全局项目阶段、里程碑、风险、优先级
-- [TASKS.md](/Users/henryzhu/project/menu-management/TASKS.md)
-  全局任务盘点、状态跟踪、阻塞信息
-- [docs/prd/README.md](/Users/henryzhu/project/menu-management/docs/prd/README.md)
-  项目级持续演进 PRD 入口
-- [docs/tdd/README.md](/Users/henryzhu/project/menu-management/docs/tdd/README.md)
-  项目级持续演进 TDD 入口
+当前仓库仍在早期建设阶段，功能与文档会持续完善。
 
-## 当前阶段目标
+## 功能方向
 
-当前建议按以下顺序推进：
+- 菜单管理
+- 分类管理
+- 菜单项管理
+- 搜索与筛选
+- 页面验证与自动化测试
 
-1. 完善协作文档和开发规范
-2. 明确产品范围与 MVP
-3. 明确系统架构与关键设计
-4. 初始化基础工程骨架
-5. 启动核心业务模块开发
+## 快速开始
 
-## 协作原则
+项目正在初始化中，后续会补充完整的启动方式。当前建议先关注以下文档：
 
-- 优先更新文档，再进入实现
-- 优先维护全局 `PLAN.md` 和 `TASKS.md`
-- PRD/TDD 采用持续演进模式，而不是一需求一文档
-- 所有重要结论都应沉淀在仓库文档中，而不是只存在于对话里
+- `docs/prd/README.md`
+- `docs/tdd/README.md`
+
+## 开发状态
+
+当前处于早期规划和模板整理阶段。
+
+## License
+
+待补充
