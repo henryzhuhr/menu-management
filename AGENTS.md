@@ -27,13 +27,15 @@ This file provides context for AI coding assistants (Claude Code, Cursor, GitHub
 
 - 先看 `PLAN.md` 和 `TASKS.md`，确认当前阶段和手头优先事项
 - 如果是新功能或较大改动，先在 PRD/TDD 里补最小必要说明，再开始写代码
-- 编写 TDD 时，默认参考 `docs/tdd/README.md` 中的 TDD 参考清单，按需取舍
+- 编写 PRD 时，默认参考 `docs/prd/checklist.md` 中的 PRD 参考清单，按需取舍
+- 编写 TDD 时，默认参考 `docs/tdd/checklist.md` 中的 TDD 参考清单，按需取舍
 - 如果只是小修复或小调整，可以直接改，但改完后要同步更新必要文档
 
 ### 2. 开发时
 
 - 优先小步推进，不一次改太多
 - 先明确接口、数据结构和关键规则，再写实现
+- 如果涉及数据库 schema 变更，必须先在 TDD 中检查迁移、兼容、回滚、索引和性能影响
 - 如果改动会影响需求、设计或任务状态，要顺手更新文档
 - 不为了“顺手”扩大范围，避免把简单任务做重
 

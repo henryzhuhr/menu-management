@@ -18,6 +18,8 @@ PRD 只需要回答几个最基本的问题：
 
 - [overview.md](./overview.md)
   产品总览模板
+- [checklist.md](./checklist.md)
+  PRD 参考清单
 
 ## 建议写法
 
