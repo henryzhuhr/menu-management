@@ -15,6 +15,8 @@ This file provides context for AI coding assistants (Claude Code, Cursor, GitHub
 
 这些文档都是项目级入口，不按需求单独复制一套。内容变多时可以拆分子文档，但 `README.md` 继续做索引。
 
+- `PLAN.md` 只放阶段级信息，不放具体任务和完成流水
+- `TASKS.md` 只放可执行任务状态，不放阶段目标、产品需求正文和技术设计正文
 - 技术栈和工具选型不预先写死在 `AGENTS.md`，默认在 TDD 阶段决定，并维护在 `docs/tdd/` 文档中。
 
 ## 轻量开发流程
@@ -22,6 +24,17 @@ This file provides context for AI coding assistants (Claude Code, Cursor, GitHub
 本项目采用单人开发的轻量流程，目标是减少流程负担，同时保留最基本的可追踪性。
 
 - 开发顺序默认遵循：`PRD -> TDD -> TASKS -> 开发 -> 测试`
+
+### 0. 最小准入
+
+开始开发前至少满足：
+
+- 当前阶段和优先级能在 `PLAN.md` / `TASKS.md` 中找到对应位置
+- 新功能或较大改动已经在 PRD 中说明目标、范围、关键规则和验收标准
+- 涉及接口、数据结构、技术选型、测试方式或风险点时，已经在 TDD 中补最小设计
+- `TASKS.md` 中有可以直接执行的任务项
+
+小修复、小文案、小文档整理可以跳过 PRD/TDD，但完成后仍需同步必要文档。
 
 ### 1. 开始前
 
@@ -51,6 +64,8 @@ This file provides context for AI coding assistants (Claude Code, Cursor, GitHub
 - 更新 `TASKS.md` 状态
 - 如果阶段目标或重点变化，更新 `PLAN.md`
 - 如果实现改变了需求或设计结论，更新 PRD/TDD
+- 说明本次验证方式；如果没有完整验证，说明未测部分和原因
+- 如果用户要求提交或推送，按提交约定完成 `commit` / `push`
 
 ## AI 助手要求
 

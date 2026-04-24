@@ -16,8 +16,8 @@ PRD 只需要回答几个最基本的问题：
 
 ## 当前索引
 
-- [overview.md](./overview.md)
-  产品总览模板
+- [template.md](./template.md)
+  PRD 填写模板
 - [checklist.md](./checklist.md)
   PRD 参考清单
 
