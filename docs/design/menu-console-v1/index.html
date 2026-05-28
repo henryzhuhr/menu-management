@@ -3,152 +3,276 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>统一菜单中心 - 菜单管理控制台 v1</title>
+    <title>统一菜单中心 - 菜单管理控制台 v2</title>
     <link rel="stylesheet" href="./styles.css" />
   </head>
   <body>
     <main class="prototype-shell">
       <section class="brief">
         <div>
-          <p class="eyebrow">Unified Menu Center / UI Prototype v1</p>
+          <p class="eyebrow">Unified Menu Center / UI Prototype v2</p>
           <h1>菜单管理控制台</h1>
           <p class="brief-copy">
-            首版设计聚焦“配置、过滤、解释、发布”四件事：管理员在同一视图中看见菜单树、选中节点详情、租户与用户条件过滤结果，以及发布治理状态。
+            v2 补齐 UX 设计层：从菜单管理员的排障、配置、验证和发布旅程出发，明确关键任务流、系统反馈和异常处理，再映射到 Web 与移动端界面。
           </p>
         </div>
-        <div class="brief-card">
-          <span>画板</span>
-          <strong>Web 1440×1024</strong>
-          <strong>iPhone 17 Pro 402×874</strong>
+        <div class="brief-meta">
+          <span>Prototype + UX</span>
+          <strong>Web 1440 x 1024</strong>
+          <strong>iPhone 17 Pro 402 x 874</strong>
+          <strong>Responsive desktop / tablet / mobile</strong>
         </div>
       </section>
 
-      <section class="canvas-grid" aria-label="菜单管理控制台双端设计稿">
-        <article class="artboard web-artboard" aria-label="Web 端菜单管理控制台">
-          <header class="web-topbar">
-            <div class="brand-lockup">
-              <div class="brand-mark">M</div>
+      <section class="ux-board" aria-label="用户体验设计说明">
+        <div class="ux-board-head">
+          <div>
+            <p class="eyebrow">Experience Strategy</p>
+            <h2>从“菜单不显示”到“安全发布”的完整旅程</h2>
+          </div>
+          <div class="ux-scenario">
+            <span>主要场景</span>
+            <strong>运营反馈某租户用户看不到新菜单，管理员需要定位原因、修正配置并灰度发布。</strong>
+          </div>
+        </div>
+
+        <div class="persona-grid">
+          <section class="persona-card">
+            <span>Primary user</span>
+            <strong>菜单管理员</strong>
+            <p>负责配置菜单、检查权限和订阅条件、推进审批发布。核心诉求是少切系统、能解释、可回滚。</p>
+          </section>
+          <section class="persona-card">
+            <span>Secondary user</span>
+            <strong>业务运营 / 客服</strong>
+            <p>发现用户看不到入口时，需要快速确认是配置问题、权限问题、订阅问题还是灰度未覆盖。</p>
+          </section>
+          <section class="persona-card">
+            <span>Approver</span>
+            <strong>安全审批人</strong>
+            <p>关注高风险变更、默认隐藏策略、发布影响范围和回滚路径，减少误暴露入口。</p>
+          </section>
+        </div>
+
+        <div class="journey-map">
+          <article class="journey-step">
+            <span>01</span>
+            <strong>发现问题</strong>
+            <p>从运营反馈或异常告警进入，先选择应用、租户、环境、地域和用户。</p>
+            <small>需要：上下文筛选、异常入口</small>
+          </article>
+          <article class="journey-step">
+            <span>02</span>
+            <strong>定位节点</strong>
+            <p>搜索菜单、路由或权限码，在菜单树中定位目标节点并查看当前状态。</p>
+            <small>需要：菜单树、搜索、状态标记</small>
+          </article>
+          <article class="journey-step">
+            <span>03</span>
+            <strong>解释可见性</strong>
+            <p>系统逐条说明订阅、权限、地域、客户端和个人规则是否命中。</p>
+            <small>需要：可见性解释、失败原因</small>
+          </article>
+          <article class="journey-step">
+            <span>04</span>
+            <strong>调整配置</strong>
+            <p>管理员修改节点、条件或租户规则，并在保存前看到影响范围。</p>
+            <small>需要：节点配置、影响预估</small>
+          </article>
+          <article class="journey-step">
+            <span>05</span>
+            <strong>验证发布</strong>
+            <p>通过预览和规则校验后进入审批、灰度、全量发布，必要时回滚。</p>
+            <small>需要：预览、审批流、发布状态</small>
+          </article>
+        </div>
+
+        <div class="ux-flow-grid">
+          <section class="flow-panel">
+            <div class="panel-head">
               <div>
-                <strong>统一菜单中心</strong>
-                <span>Menu Governance Console</span>
+                <h3>关键任务流</h3>
+                <span>Web 管理端主路径</span>
               </div>
             </div>
-            <div class="context-pills">
-              <span>应用 Console</span>
-              <span>租户 Acme Corp</span>
-              <span>环境 Prod</span>
-              <span>地域 CN-East</span>
+            <div class="flow-steps">
+              <b>选择上下文</b>
+              <b>定位菜单节点</b>
+              <b>查看可见性解释</b>
+              <b>修正条件或权限</b>
+              <b>运行时预览</b>
+              <b>提交审批发布</b>
             </div>
-            <div class="top-actions">
-              <button class="ghost-button">运行时预览</button>
-              <button class="primary-button">发布版本</button>
+          </section>
+          <section class="flow-panel">
+            <div class="panel-head">
+              <div>
+                <h3>关键反馈</h3>
+                <span>每一步都要回答用户的疑问</span>
+              </div>
             </div>
-          </header>
+            <ul class="ux-checklist">
+              <li><b>我在哪个上下文？</b><span>应用、租户、环境、地域持续可见。</span></li>
+              <li><b>为什么不可见？</b><span>按规则逐条解释，不只给布尔结果。</span></li>
+              <li><b>改动影响谁？</b><span>展示租户、用户和客户端影响范围。</span></li>
+              <li><b>发布安全吗？</b><span>高风险变更进入审批，支持灰度和回滚。</span></li>
+            </ul>
+          </section>
+          <section class="flow-panel">
+            <div class="panel-head">
+              <div>
+                <h3>状态覆盖</h3>
+                <span>后续工程实现要补齐的体验状态</span>
+              </div>
+            </div>
+            <div class="state-chips">
+              <span>加载中</span>
+              <span>无搜索结果</span>
+              <span>权限不足</span>
+              <span>订阅未命中</span>
+              <span>审批驳回</span>
+              <span>灰度失败</span>
+              <span>回滚成功</span>
+              <span>数据延迟</span>
+            </div>
+          </section>
+        </div>
+      </section>
 
+      <section class="canvas-grid" aria-label="菜单管理控制台响应式设计稿">
+        <article class="artboard web-artboard" aria-label="Web 端菜单管理控制台">
           <aside class="web-sidebar">
-            <p class="nav-label">Workspace</p>
-            <nav class="nav-stack">
-              <a>仪表盘</a>
+            <div class="brand-lockup">
+              <span class="brand-mark">M</span>
+              <div>
+                <strong>统一菜单中心</strong>
+                <small>Menu Center</small>
+              </div>
+            </div>
+            <nav class="nav-stack" aria-label="主导航">
+              <a>总览</a>
               <a class="active">菜单配置</a>
-              <a>租户自定义</a>
+              <a>租户规则</a>
               <a>发布审批</a>
               <a>诊断分析</a>
               <a>审计日志</a>
+              <a>系统集成</a>
             </nav>
-            <div class="sidebar-status">
-              <span>安全策略</span>
+            <section class="sidebar-card">
+              <span>运行时策略</span>
               <strong>默认隐藏</strong>
-              <small>权限、订阅或条件不明确时，运行时菜单不会下发。</small>
-            </div>
+              <small>权限、订阅或条件无法确认时，不向客户端下发菜单。</small>
+            </section>
           </aside>
 
-          <section class="web-workspace">
-            <div class="workspace-title">
+          <section class="web-main">
+            <header class="web-topbar">
+              <div class="context-selectors">
+                <button>应用 Console</button>
+                <button>租户 Acme Corp</button>
+                <button>环境 Prod</button>
+                <button>地域 CN-East</button>
+              </div>
+              <div class="top-actions">
+                <button class="secondary-button">运行时预览</button>
+                <button class="primary-button">发布版本</button>
+              </div>
+            </header>
+
+            <section class="workspace-head">
               <div>
                 <p class="eyebrow">Menu Configuration</p>
                 <h2>菜单配置与可见性诊断</h2>
+                <span>当前版本 v2026.04.30 · 灰度 18 租户 · 最近同步 2 分钟前</span>
               </div>
-              <div class="release-chip">当前版本 v2026.04.30 · 灰度 18 租户</div>
-            </div>
+              <div class="release-state">
+                <b>Ready for approval</b>
+                <small>6 个待审批变更，2 个高风险</small>
+              </div>
+            </section>
 
-            <div class="metric-grid">
-              <div class="metric-card">
+            <section class="summary-grid" aria-label="关键指标">
+              <div class="summary-item">
                 <span>可见菜单</span>
                 <strong>128</strong>
-                <small>+12 本周新增</small>
+                <small>较上周 +12</small>
               </div>
-              <div class="metric-card warning">
+              <div class="summary-item warning">
                 <span>待审批</span>
                 <strong>6</strong>
-                <small>2 个高风险变更</small>
+                <small>安全相关 2 项</small>
               </div>
-              <div class="metric-card">
+              <div class="summary-item">
                 <span>灰度租户</span>
                 <strong>18</strong>
                 <small>覆盖 23% 活跃用户</small>
               </div>
-              <div class="metric-card danger">
+              <div class="summary-item danger">
                 <span>异常告警</span>
                 <strong>3</strong>
                 <small>订阅源延迟</small>
               </div>
-            </div>
+            </section>
 
-            <div class="work-grid">
+            <section class="work-grid">
               <section class="panel tree-panel">
                 <div class="panel-head">
                   <div>
                     <h3>菜单树</h3>
                     <span>Web Console · 中文</span>
                   </div>
-                  <button class="mini-button">新增节点</button>
+                  <button class="small-button">新增节点</button>
                 </div>
-                <label class="search-box">搜索菜单、路由、权限码</label>
+                <div class="toolbar-row">
+                  <span>搜索菜单、路由、权限码</span>
+                  <b>全部状态</b>
+                </div>
                 <div class="tree-list">
                   <div class="tree-row root-row">
-                    <span class="node-dot live"></span>
+                    <span class="chevron">▾</span>
+                    <span class="node-status live"></span>
                     <strong>首页</strong>
                     <em>强制显示</em>
                   </div>
                   <div class="tree-row">
-                    <span class="indent"></span>
-                    <span class="node-dot live"></span>
+                    <span class="tree-indent"></span>
+                    <span class="node-status live"></span>
                     <strong>工作台</strong>
-                    <em>订阅 Enterprise</em>
+                    <em>Enterprise</em>
                   </div>
                   <div class="tree-row selected">
-                    <span class="indent"></span>
-                    <span class="node-dot active"></span>
+                    <span class="tree-indent"></span>
+                    <span class="node-status active"></span>
                     <strong>菜单配置</strong>
-                    <em>权限 menu.admin</em>
+                    <em>menu.admin</em>
                   </div>
                   <div class="tree-row">
-                    <span class="indent double"></span>
-                    <span class="node-dot live"></span>
+                    <span class="tree-indent deep"></span>
+                    <span class="node-status live"></span>
                     <strong>菜单树管理</strong>
                     <em>已发布</em>
                   </div>
-                  <div class="tree-row">
-                    <span class="indent double"></span>
-                    <span class="node-dot muted"></span>
+                  <div class="tree-row draft">
+                    <span class="tree-indent deep"></span>
+                    <span class="node-status draft"></span>
                     <strong>租户排序规则</strong>
                     <em>草稿</em>
                   </div>
                   <div class="tree-row selected-deep">
-                    <span class="indent double"></span>
-                    <span class="node-dot active"></span>
+                    <span class="tree-indent deep"></span>
+                    <span class="node-status active"></span>
                     <strong>运行时诊断</strong>
                     <em>选中</em>
                   </div>
                   <div class="tree-row">
-                    <span class="indent"></span>
-                    <span class="node-dot warn"></span>
+                    <span class="tree-indent"></span>
+                    <span class="node-status warning"></span>
                     <strong>审计日志</strong>
                     <em>审批中</em>
                   </div>
                   <div class="tree-row disabled">
-                    <span class="indent"></span>
-                    <span class="node-dot off"></span>
+                    <span class="tree-indent"></span>
+                    <span class="node-status danger"></span>
                     <strong>计费中心</strong>
                     <em>订阅未命中</em>
                   </div>
@@ -158,13 +282,13 @@
               <section class="panel detail-panel">
                 <div class="panel-head">
                   <div>
-                    <h3>节点详情</h3>
+                    <h3>节点配置</h3>
                     <span>运行时诊断</span>
                   </div>
                   <span class="status-pill">已发布</span>
                 </div>
-                <div class="detail-hero">
-                  <span class="node-icon">D</span>
+                <div class="detail-title">
+                  <span class="page-icon">D</span>
                   <div>
                     <strong>运行时诊断</strong>
                     <small>/menu/runtime-diagnostics</small>
@@ -188,10 +312,10 @@
                     <strong>menu:runtime:read</strong>
                   </div>
                 </div>
-                <div class="condition-stack">
+                <div class="condition-block">
                   <span>可见条件</span>
                   <div>
-                    <b>订阅 ≥ Pro</b>
+                    <b>订阅 >= Pro</b>
                     <b>用户有 read 权限</b>
                     <b>地域 CN-East</b>
                     <b>环境 Prod</b>
@@ -205,32 +329,44 @@
                     <h3>可见性解释</h3>
                     <span>租户 Acme · 用户 u_1908</span>
                   </div>
+                  <span class="status-pill success">显示</span>
                 </div>
-                <div class="decision-banner pass">最终结果：显示</div>
-                <ul class="rule-list">
-                  <li><span class="ok">✓</span> 已命中发布版本 v2026.04.30</li>
-                  <li><span class="ok">✓</span> 租户订阅 Enterprise 覆盖功能点</li>
-                  <li><span class="ok">✓</span> 用户权限包含 menu:runtime:read</li>
-                  <li><span class="ok">✓</span> 地域和客户端条件满足</li>
-                  <li><span class="no">!</span> 个人隐藏规则未设置</li>
-                </ul>
-                <div class="alert-card">
-                  <strong>风险提示</strong>
-                  <span>订阅系统同步延迟 4 分钟，仍在 SLA 内。</span>
+                <div class="decision-card">
+                  <span>最终结果</span>
+                  <strong>该用户可见</strong>
+                  <small>命中发布版本 v2026.04.30</small>
                 </div>
+                <ol class="rule-list">
+                  <li>
+                    <b>通过</b>
+                    <span>租户订阅 Enterprise 覆盖功能点</span>
+                  </li>
+                  <li>
+                    <b>通过</b>
+                    <span>用户权限包含 menu:runtime:read</span>
+                  </li>
+                  <li>
+                    <b>通过</b>
+                    <span>地域、环境和客户端条件满足</span>
+                  </li>
+                  <li class="warn">
+                    <b>提示</b>
+                    <span>订阅系统同步延迟 4 分钟，仍在 SLA 内</span>
+                  </li>
+                </ol>
               </section>
-            </div>
+            </section>
 
-            <section class="release-strip">
-              <div>
+            <section class="release-strip" aria-label="发布流程">
+              <div class="active">
                 <span>01</span>
                 <strong>草稿校验</strong>
-                <small>通过 42 条规则</small>
+                <small>42 条规则已通过</small>
               </div>
-              <div>
+              <div class="active">
                 <span>02</span>
-                <strong>审批中</strong>
-                <small>等待安全审批</small>
+                <strong>安全审批</strong>
+                <small>等待 2 位审批人</small>
               </div>
               <div>
                 <span>03</span>
@@ -240,7 +376,7 @@
               <div>
                 <span>04</span>
                 <strong>全量发布</strong>
-                <small>可一键回滚</small>
+                <small>支持一键回滚</small>
               </div>
             </section>
           </section>
@@ -252,17 +388,24 @@
             <div class="phone-screen">
               <header class="phone-status">
                 <span>9:41</span>
-                <span>5G  100%</span>
+                <span>5G 100%</span>
               </header>
-              <section class="phone-hero">
-                <p class="eyebrow">Menu Console</p>
-                <h2>菜单控制台</h2>
-                <span>Acme · Prod · CN-East</span>
+              <section class="phone-header">
+                <div>
+                  <p class="eyebrow">Menu Console</p>
+                  <h2>菜单控制台</h2>
+                  <span>Acme · Prod · CN-East</span>
+                </div>
+                <button>预览</button>
               </section>
-              <div class="phone-metrics">
+              <div class="phone-summary">
                 <div>
                   <strong>128</strong>
                   <span>可见菜单</span>
+                </div>
+                <div>
+                  <strong>6</strong>
+                  <span>待审批</span>
                 </div>
                 <div>
                   <strong>3</strong>
@@ -270,13 +413,13 @@
                 </div>
               </div>
               <nav class="phone-tabs">
-                <a class="active">菜单树</a>
+                <a class="active">菜单</a>
                 <a>诊断</a>
                 <a>发布</a>
               </nav>
-              <section class="phone-card menu-card">
+              <section class="phone-card">
                 <div class="phone-row">
-                  <span class="node-dot live"></span>
+                  <span class="node-status live"></span>
                   <div>
                     <strong>首页</strong>
                     <small>强制显示</small>
@@ -284,7 +427,7 @@
                   <em>Live</em>
                 </div>
                 <div class="phone-row">
-                  <span class="node-dot live"></span>
+                  <span class="node-status live"></span>
                   <div>
                     <strong>工作台</strong>
                     <small>订阅 Enterprise</small>
@@ -292,7 +435,7 @@
                   <em>Live</em>
                 </div>
                 <div class="phone-row selected">
-                  <span class="node-dot active"></span>
+                  <span class="node-status active"></span>
                   <div>
                     <strong>运行时诊断</strong>
                     <small>menu:runtime:read</small>
@@ -300,7 +443,7 @@
                   <em>选中</em>
                 </div>
                 <div class="phone-row disabled">
-                  <span class="node-dot off"></span>
+                  <span class="node-status danger"></span>
                   <div>
                     <strong>计费中心</strong>
                     <small>订阅未命中</small>
@@ -315,7 +458,7 @@
                     <strong>运行时诊断</strong>
                     <span>最终结果：显示</span>
                   </div>
-                  <b>✓</b>
+                  <b>通过</b>
                 </div>
                 <ul>
                   <li>订阅 Enterprise 覆盖功能点</li>
