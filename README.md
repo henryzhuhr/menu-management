@@ -20,6 +20,9 @@
 
 项目正在初始化中，后续会补充完整的启动方式。当前建议先关注以下文档：
 
+- `PLAN.md`
+- `ROADMAP.md`
+- `docs/README.md`
 - `docs/prd/README.md`
 - `docs/tdd/README.md`
 
