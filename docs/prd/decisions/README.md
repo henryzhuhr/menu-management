@@ -28,6 +28,10 @@
   管理后台、导入导出、预览、诊断和分析
 - [008-non-functional.md](./008-non-functional.md)
   SLA、容量、安全、合规和数据留存
+- [009-release-channel.md](./009-release-channel.md)
+  发布通道模型、租户通道绑定、安全 hotfix、跨通道预览、版本快照和数据存储
+- [010-business-isolation-and-independent-release.md](./010-business-isolation-and-independent-release.md)
+  业务隔离、配置发布与模块代码发布边界、运行时业务上下文和灰度命中规则
 
 ## 决策清单
 
@@ -91,3 +95,14 @@
 - [D058 范围排除](./001-product-scope.md#d058-out-of-scope)
 - [D059 验收重点](./001-product-scope.md#d059-acceptance-priority)
 - [D060 PRD 形态](./001-product-scope.md#d060-prd-shape)
+- [D061 发布通道模型](./009-release-channel.md#d061-channel-model)
+- [D062 租户通道绑定](./009-release-channel.md#d062-tenant-channel-binding)
+- [D063 安全变更处理](./009-release-channel.md#d063-security-hotfix)
+- [D064 跨通道预览](./009-release-channel.md#d064-cross-channel-preview)
+- [D065 版本创建与功能上车](./009-release-channel.md#d065-version-snapshot)
+- [D066 数据库存储模型](./009-release-channel.md#d066-db-snapshot-storage)
+- [D067 服务实例版本映射](./009-release-channel.md#d067-service-version-mapping)
+- [D068 业务独立发布单元](./010-business-isolation-and-independent-release.md#d068-business-release-unit)
+- [D069 代码发布边界](./010-business-isolation-and-independent-release.md#d069-runtime-code-release-boundary)
+- [D070 运行时业务上下文](./010-business-isolation-and-independent-release.md#d070-menu-runtime-context)
+- [D071 灰度版本选择规则](./010-business-isolation-and-independent-release.md#d071-gray-resolution)

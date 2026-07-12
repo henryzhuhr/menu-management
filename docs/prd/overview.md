@@ -65,8 +65,10 @@
 - 安全相关变更需要实时影响运行时菜单。
 - 关键变更必须经过可配置审批流。
 - 所有治理动作需要可审计、可诊断、可回滚。
+- 应用是菜单版本和配置发布的基本隔离单元；多个应用可以共享菜单服务，但不能共享未受控的可变版本指针。
+- 菜单配置发布与菜单服务代码发布解耦；共享实例代码升级影响实例承载的业务，需要代码独立升级时使用独立运行组。
 
-决策引用：[D018](decisions/003-visibility-rules.md#d018-default-visibility)、[D025](decisions/003-visibility-rules.md#d025-visibility-precedence)、[D028](decisions/005-release-governance.md#d028-realtime-scope)、[D043](decisions/005-release-governance.md#d043-critical-changes)、[D044](decisions/005-release-governance.md#d044-approval-policy)、[D049](decisions/006-integrations.md#d049-external-integrations)、[D055](decisions/006-integrations.md#d055-subscription-source-of-truth)、[D056](decisions/006-integrations.md#d056-feature-source-of-truth)
+决策引用：[D018](decisions/003-visibility-rules.md#d018-default-visibility)、[D025](decisions/003-visibility-rules.md#d025-visibility-precedence)、[D028](decisions/005-release-governance.md#d028-realtime-scope)、[D043](decisions/005-release-governance.md#d043-critical-changes)、[D044](decisions/005-release-governance.md#d044-approval-policy)、[D049](decisions/006-integrations.md#d049-external-integrations)、[D055](decisions/006-integrations.md#d055-subscription-source-of-truth)、[D056](decisions/006-integrations.md#d056-feature-source-of-truth)、[D068](decisions/010-business-isolation-and-independent-release.md#d068-business-release-unit)、[D069](decisions/010-business-isolation-and-independent-release.md#d069-runtime-code-release-boundary)
 
 ## 6. 验收重点
 

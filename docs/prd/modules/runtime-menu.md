@@ -22,6 +22,22 @@
 
 决策引用：[D017](../decisions/003-visibility-rules.md#d017-runtime-context)、[D019](../decisions/002-menu-model.md#d019-env-region-semantics)、[D034](../decisions/002-menu-model.md#d034-client-scope)
 
+### 2.1 业务上下文与多业务服务
+
+`应用`是菜单版本和发布治理的第一隔离维度。一个菜单服务实例可以同时承载多个应用，但每次查询必须明确受信任的应用上下文。
+
+运行时菜单解析上下文为：
+
+```text
+(app, tenant, user, environment, region, client, locale)
+```
+
+`app` 应来自访问令牌、网关路由或服务端调用上下文，并参与版本选择、权限校验、缓存 key、诊断和审计。不能只依赖前端任意传入的 `app` 查询参数，否则可能把业务 A 的菜单或权限边界错误地用于业务 B。
+
+同一个租户如果同时使用多个业务，需要按业务分别查询或调用批量接口；每个业务仍使用自己的 `(app, version)` 快照和应用级通道指针。
+
+决策引用：[D004](../decisions/001-product-scope.md#d004-app-scope)、[D070](../decisions/010-business-isolation-and-independent-release.md#d070-menu-runtime-context)
+
 ## 3. 返回内容
 
 运行时返回内容不仅包含左树节点，还需要包含前端导航所需元数据：
@@ -105,6 +121,7 @@
 - 强制菜单不能被用户隐藏或重排，但仍受权限和订阅约束。
 - 外部权限或订阅不可用时，系统安全降级。
 - 安全相关变更在下一次运行时查询中实时生效。
+- 业务 A 和业务 B 共用服务实例时，查询结果、版本命中和缓存按应用隔离。
 - 运行时菜单查询满足 99.9% SLA 和 P95 200ms 目标。
 
 决策引用：[D052](../decisions/008-non-functional.md#d052-sla-target)、[D059](../decisions/001-product-scope.md#d059-acceptance-priority)

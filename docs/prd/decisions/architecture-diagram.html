@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <script src="https://cdn.jsdelivr.net/npm/mermaid@10/dist/mermaid.min.js"></script>
+  <style>
+    body { font-family: -apple-system, sans-serif; max-width: 900px; margin: 0 auto; padding: 20px; background: #f5f5f5; }
+    h2 { color: #333; margin-top: 40px; }
+    .mermaid { background: white; padding: 20px; border-radius: 8px; margin: 20px 0; }
+    .problem { border: 2px solid #ff6b6b; }
+  </style>
+</head>
+<body>
+  <h1>菜单中心架构图</h1>
+
+  <h2>1. 整体架构</h2>
+  <div class="mermaid">
+graph TB
+    subgraph ADMIN["管理平面"]
+        PM["平台管理员<br/>创建版本 / 推进通道 / 租户管理"]
+    end
+
+    subgraph APPS["应用层（业务方）"]
+        A1["支付业务<br/>独立版本线: v4→v5→v6"]
+        A2["电商业务<br/>独立版本线: v2"]
+    end
+
+    subgraph K8S["K8s 集群"]
+        subgraph NS_EAP["EAP Namespace"]
+            SVC_EAP["菜单服务（EAP）<br/>version 配置"]
+        end
+        subgraph NS_STD["STD Namespace"]
+            SVC_STD["菜单服务（STD）<br/>version 配置"]
+        end
+        subgraph NS_KA["KA Namespace"]
+            SVC_KA["菜单服务（KA）<br/>version 配置"]
+        end
+    end
+
+    subgraph DB["数据层"]
+        MYSQL[("共享数据库<br/>menu_items 表<br/>WHERE version='vX'")]
+    end
+
+    subgraph TENANTS["租户层"]
+        T1["Tenant-EAP_01<br/>绑定 EAP 通道"]
+        T2["Tenant-STD_01<br/>绑定 STD 通道"]
+        T3["Tenant-KA_01<br/>绑定 KA 通道"]
+    end
+
+    PM --> A1
+    PM --> A2
+    A1 -.->|EAP| NS_EAP
+    A1 -.->|STD| NS_STD
+    A1 -.->|KA| NS_KA
+    A2 -.->|EAP| NS_EAP
+    A2 -.->|STD| NS_STD
+    A2 -.->|KA| NS_KA
+    SVC_EAP --> MYSQL
+    SVC_STD --> MYSQL
+    SVC_KA --> MYSQL
+    T1 --> SVC_EAP
+    T2 --> SVC_STD
+    T3 --> SVC_KA
+  </div>
+
+  <h2>2. 版本推进：支付业务 v6 的生命周期</h2>
+  <div class="mermaid">
+graph LR
+    subgraph STEP1["第1步: 创建 v6"]
+        C1["管理员基于 v5 快照<br/>增删改菜单功能<br/>保存为 v6<br/>发布到 EAP 通道"]
+    end
+
+    subgraph STEP2["第2步: EAP 验证"]
+        C2["Tenant-EAP_01<br/>看到 v6<br/>验证新功能"]
+    end
+
+    subgraph STEP3["第3步: 推进 STD"]
+        C3["STD 服务 version<br/>指向 v6<br/>Tenant-STD_01 看到 v6"]
+    end
+
+    subgraph STEP4["第4步: 推进 KA"]
+        C4["KA 服务 version<br/>指向 v6<br/>Tenant-KA_01 看到 v6<br/>全量发布完成"]
+    end
+
+    STEP1 --> STEP2 --> STEP3 --> STEP4
+    STEP4 -.->|"然后才能创建 v7"| STEP1
+  </div>
+
+  <h2 class="problem">3. 核心问题：多应用 + 单服务实例</h2>
+  <div class="mermaid">
+graph TB
+    subgraph SCENE["场景：Tenant-STD_01 查询菜单"]
+        T["Tenant-STD_01<br/>订阅了：支付 + 电商"]
+    end
+
+    subgraph SVC["STD Namespace 的菜单服务"]
+        S["菜单服务<br/>version = ???"]
+    end
+
+    subgraph DATA["数据库中的版本快照"]
+        D1["支付 v6（EAP 通道）"]
+        D2["支付 v5（STD 通道）"]
+        D3["支付 v4（KA 通道）"]
+        D4["电商 v2（全部通道）"]
+    end
+
+    T -->|"GET /menu?tenant=STD_01"| S
+    S -->|"SELECT * FROM menu_items<br/>WHERE version=? AND app=?"| DATA
+
+    style S fill:#ff6b6b,color:#fff
+  </div>
+
+  <p style="color:#ff6b6b;font-weight:bold;">
+    问题：STD 服务只有一个 version 值，但支付（v5）和电商（v2）的 STD 通道版本不同。<br/>
+    如果 version=v5 → 电商查不到菜单；如果 version='v2' → 支付拿到旧版本。
+  </p>
+
+  <h2>4. 方案 A：version 按应用映射</h2>
+  <div class="mermaid">
+graph LR
+    subgraph SVC_A["STD 服务实例"]
+        CFG["version 配置改为映射<br/>支付 → v5<br/>电商 → v2"]
+    end
+
+    subgraph DB_A["数据库"]
+        Q1["WHERE app='支付' AND version='v5'"]
+        Q2["WHERE app='电商' AND version='v2'"]
+    end
+
+    CFG --> Q1
+    CFG --> Q2
+  </div>
+
+  <p>每个应用的版本独立推进，服务按应用 + 版本组合查询。灵活但配置复杂度随应用数增长。</p>
+
+  <h2>5. 方案 B：全局版本号聚合</h2>
+  <div class="mermaid">
+graph LR
+    subgraph SVC_B["STD 服务实例"]
+        CFG2["version = v6（全局）"]
+    end
+
+    subgraph DB_B["数据库"]
+        Q3["WHERE version='v6'<br/>支付(新内容) + 电商(自动拷贝)"]
+    end
+
+    CFG2 --> Q3
+  </div>
+
+  <p>version 号全局递增。v6 只改了支付，电商内容自动从 v5 拷贝。查询简单但每次发版都需要聚合所有应用快照。</p>
+
+</body>
+</html>
