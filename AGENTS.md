@@ -1,4 +1,4 @@
-# AGENTS.md
+# Repository Guidelines / 仓库协作指南
 
 本文件是本仓库的 AI agent 操作地图。它只记录代理需要执行判断的项目规则；产品背景、完整技术设计和长流程放在对应文档中。
 
